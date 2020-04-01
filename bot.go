@@ -5,7 +5,6 @@ import (
 	"context"
 	"log"
 	"net/http"
-	"net/url"
 	"os"
 	"strconv"
 	"strings"
@@ -70,22 +69,17 @@ func startJestBot(ctx context.Context) error {
 		case "prediction":
 			msg.Text = prediction(client, upd.CommandArguments())
 		case "meme":
-			s := client.GetPicture()
-			u, _ := url.Parse(s)
-			m := tgbotapi.NewPhotoUpload(upd.Chat.ID, u)
-			log.Printf("%+v", m)
-			lm, err := bot.Send(m)
-			log.Println(lm, err)
-			msg.Text = "tried to upload"
+			msg.Text = client.GetPicture()
 		case "full":
 			msg.Text = prediction(client, upd.CommandArguments()) + "\n" + client.GetPicture()
 		default:
 			msg.Text = "я так не умею"
 		}
-
+		log.Println("recieved: " + upd.Text)
 		if _, err := bot.Send(msg); err != nil {
 			log.Panic(err)
 		}
+		log.Println("answered: " + msg.Text)
 	}
 
 	return nil
