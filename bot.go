@@ -5,6 +5,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"strconv"
 	"strings"
@@ -32,6 +33,7 @@ func startJestBot(ctx context.Context) error {
 		Port       = os.Getenv("PORT")
 		WebhookURL = os.Getenv("WebhookURL")
 	)
+	log.Printf("%+v", tgbotapi.NewWebhook(WebhookURL))
 
 	client := &pkg.Client{
 		InternalClient:        &fasthttp.Client{},
@@ -68,6 +70,10 @@ func startJestBot(ctx context.Context) error {
 		case "prediction":
 			msg.Text = prediction(client, upd.CommandArguments())
 		case "meme":
+			s := client.GetPicture()
+			u, _ := url.Parse(s)
+			m := tgbotapi.NewPhotoUpload(upd.Chat.ID, u)
+			bot.Send(m)
 			msg.Text = client.GetPicture()
 		case "full":
 			msg.Text = prediction(client, upd.CommandArguments()) + "\n" + client.GetPicture()
