@@ -73,8 +73,9 @@ func startJestBot(ctx context.Context) error {
 			s := client.GetPicture()
 			u, _ := url.Parse(s)
 			m := tgbotapi.NewPhotoUpload(upd.Chat.ID, u)
+			log.Printf("%+v", m)
 			bot.Send(m)
-			msg.Text = client.GetPicture()
+			msg.Text = "tried to upload"
 		case "full":
 			msg.Text = prediction(client, upd.CommandArguments()) + "\n" + client.GetPicture()
 		default:
