@@ -1,16 +1,26 @@
 # JestAndMemeBot
 
-To contact bot: t.me/JestAndMemeBot
+To contact bot: https://teleg.one/JestAndMemeBot or simply @JestAndMemeBot
 
-Commands: 
+### Commands: 
 
+Sends meme from https://vk.com/luluipepe choosed randomly using random.org API
+```
 /meme 
+```
 
-/prediction \<int> \<int>
+Sends you sentence from given page and line of Infinite Jest by David Foster Wallace and translates it to russian using Yandex Translate API
+```
+/prediction <int> <int>
+```
 
-/full \<int> \<int>
+Combines previous commands
+```
+/full <int> <int>
+```
 
 ## TODO
+- link thak roskomnadzor wouldn't block
 - write about API's used
 - write documentation 
     -  readme
