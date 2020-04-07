@@ -20,7 +20,6 @@ Combines previous commands
 ```
 
 ## TODO
-- link thak roskomnadzor wouldn't block
 - write about API's used
 - write documentation 
     -  readme
